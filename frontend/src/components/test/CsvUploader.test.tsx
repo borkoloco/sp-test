@@ -12,7 +12,7 @@ jest.mock("axios", () => ({
 describe("CsvUploader", () => {
   it("renders without crashing", () => {
     render(<CsvUploader />);
-    expect(screen.getByText(/SP Test/i)).toBeInTheDocument();
+    expect(screen.getByText(/SP-Test/i)).toBeInTheDocument();
   });
 
   it("handles file upload", async () => {
@@ -34,7 +34,7 @@ describe("CsvUploader", () => {
 
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
-        "https://localhost:3001",
+        "http://localhost:3000/api/files",
         //poner dire del back deployado
         expect.any(FormData)
       );
