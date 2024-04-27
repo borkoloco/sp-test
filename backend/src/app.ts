@@ -1,12 +1,15 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import cors from "cors";
+import { router } from "./router/router";
 
 const app = express();
+const port = 3000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hola Mundo desde TypeScript!");
+app.use(cors());
+app.use(router);
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+export { app };
