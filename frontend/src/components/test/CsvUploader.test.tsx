@@ -34,7 +34,8 @@ describe("CsvUploader", () => {
 
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(
-        "http://localhost:3000/api/files",
+        // "http://localhost:3000/api/files",
+        "https://sp-test-o230.onrender.com/api/files",
         //poner dire del back deployado
         expect.any(FormData)
       );
