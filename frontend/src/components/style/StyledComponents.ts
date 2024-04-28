@@ -24,7 +24,7 @@ export const Toolbar = styled.div`
     justify-content: center;
 
     div {
-      width: 100%; // Adjust the margin as needed
+      width: 100%;
       margin-bottom: 5px;
     }
   }
@@ -50,7 +50,6 @@ export const Div = styled.div`
 export const Body = styled.div`
   display: flex;
   flex-wrap: wrap;
-  // justify-content: center;
   padding: 20px;
 `;
 
