@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Button, Card } from "react-bootstrap";
 import SearchBar from "./SearchBar";
@@ -58,14 +58,15 @@ const CsvUploader: React.FC = () => {
     }
   };
 
-  const fetchUsersData = async () => {
+  // Memoriza fetchUsersData para evitar que cambie en cada renderizado
+  const fetchUsersData = useCallback(async () => {
     try {
       const response = await axios.get(`${url}/api/users?q=${searchTerm}`);
       setCsvData(response.data.data || []);
     } catch (error: any) {
       handleFetchDataError(error);
     }
-  };
+  }, [url, searchTerm]); // Se actualiza solo si url o searchTerm cambian
 
   const handleFileUploadError = (error: any) => {
     if (error.response) {
@@ -92,9 +93,10 @@ const CsvUploader: React.FC = () => {
     }
   };
 
+  // Incluye fetchUsersData en la lista de dependencias
   useEffect(() => {
-    fetchUsersData();
-  }, [searchTerm]);
+    fetchUsersData(); // Se llama cuando searchTerm cambia
+  }, [fetchUsersData]);
 
   return (
     <Container>
