@@ -72,8 +72,27 @@ const CsvUploader: React.FC = () => {
     }
   };
 
-  const handleFileUploadError = (errorMessage: string) => {
-    setMessageHere(errorMessage);
+  // const handleFileUploadError = (errorMessage: string) => {
+  //   setMessageHere(errorMessage);
+  //   setFileInvalid(true);
+  // };
+  const handleFileUploadError = (error: any) => {
+    if (error.response) {
+      // Si el servidor responde con un error, muestra el mensaje del servidor
+      console.error("Error status:", error.response.status);
+      console.error("Error data:", error.response.data);
+      setMessageHere(
+        error.response.data.message || "Upload failed due to an unknown error."
+      );
+    } else if (error.request) {
+      // Si no hay respuesta del servidor
+      console.error("Error request:", error.request);
+      setMessageHere("No response received from server. Please try again.");
+    } else {
+      // Otros errores
+      console.error("Error message:", error.message);
+      setMessageHere(error.message);
+    }
     setFileInvalid(true);
   };
 
