@@ -1,0 +1,19 @@
+[build]
+  # El directorio de salida de `react-scripts build` es `build`
+  publish = "build"
+  command = "npm run build"
+
+[dev]
+  # Este es el puerto donde correrá la aplicación localmente (4000, según tu script)
+  port = 4000
+
+[build.environment]
+  # Variables de entorno que quieras usar durante el build
+  NODE_ENV = "production"
+  API_URL = "https://adjacent-aubry-borkoloco-dce8b314.koyeb.app" # Aquí puedes agregar tus variables de entorno
+
+[[redirects]]
+  # Redirige todas las rutas a `index.html` para habilitar la navegación con React Router
+  from = "/*"
+  to = "/index.html"
+  status = 200
