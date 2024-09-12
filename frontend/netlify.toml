@@ -1,7 +1,7 @@
 [build]
   # El directorio de salida de `react-scripts build` es `build`
   publish = "build"
-  command = "npm run build"
+  command = "npm install --include=dev && npm run build"
 
 [dev]
   # Este es el puerto donde correrá la aplicación localmente (4000, según tu script)
