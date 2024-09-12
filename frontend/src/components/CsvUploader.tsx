@@ -22,7 +22,7 @@ const CsvUploader: React.FC = () => {
   const [messageError, setMessageHere] = useState<string>("");
 
   // const url = "http://localhost:3000";
-  const url = "https://sp-test-o230.onrender.com";
+  const url = process.env.API_URL;
 
   const uploadFile = async () => {
     try {
