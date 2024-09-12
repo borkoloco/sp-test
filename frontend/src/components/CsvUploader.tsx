@@ -30,7 +30,14 @@ const CsvUploader: React.FC = () => {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await axios.post(`${url}/api/files`, formData);
+        console.log(file); // Verifica que el archivo está siendo seleccionado
+        console.log(formData); // Verifica que el FormData se está creando correctamente
+
+        const response = await axios.post(`${url}/api/files`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
         if (response.status === 200) {
           await fetchUsersData();
