@@ -2,8 +2,6 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CsvUploader from "../CsvUploader";
 import axios from "axios";
-import * as dotenv from "dotenv";
-dotenv.config();
 
 // Mocking axios module
 jest.mock("axios", () => ({
