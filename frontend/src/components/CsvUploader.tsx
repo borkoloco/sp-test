@@ -58,7 +58,14 @@ const CsvUploader: React.FC = () => {
     }
   };
 
-  // Memoriza fetchUsersData para evitar que cambie en cada renderizado
+  // Memoriza handleFetchDataError para evitar recrearlo en cada render
+  const handleFetchDataError = useCallback((error: any) => {
+    if (error.response && error.response.status === 400) {
+      handleFileUploadError(error.response.data.message);
+    }
+  }, []); // No tiene dependencias que necesiten ser actualizadas
+
+  // Memoriza fetchUsersData y agrega handleFetchDataError como dependencia
   const fetchUsersData = useCallback(async () => {
     try {
       const response = await axios.get(`${url}/api/users?q=${searchTerm}`);
@@ -66,7 +73,7 @@ const CsvUploader: React.FC = () => {
     } catch (error: any) {
       handleFetchDataError(error);
     }
-  }, [url, searchTerm]); // Se actualiza solo si url o searchTerm cambian
+  }, [url, searchTerm, handleFetchDataError]); // handleFetchDataError agregado como dependencia
 
   const handleFileUploadError = (error: any) => {
     if (error.response) {
@@ -85,12 +92,6 @@ const CsvUploader: React.FC = () => {
       setMessageHere(error.message);
     }
     setFileInvalid(true); // Marca que el archivo es inválido
-  };
-
-  const handleFetchDataError = (error: any) => {
-    if (error.response && error.response.status === 400) {
-      handleFileUploadError(error.response.data.message);
-    }
   };
 
   // Incluye fetchUsersData en la lista de dependencias
