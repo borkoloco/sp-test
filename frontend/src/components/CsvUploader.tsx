@@ -13,6 +13,8 @@ import {
   CardWrapper,
   Div,
 } from "./style/StyledComponents";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const CsvUploader: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
